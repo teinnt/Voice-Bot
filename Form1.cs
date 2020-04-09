@@ -15,6 +15,13 @@ using System.Linq;
  * move your mouse to the key word (eg. move your mouse to the word "SpeechSynthesizer" 
  * to see its function) or Ctrl + click to navigate to its location.
  * 
+ * In other to make it speak, you need to add System.Speak reference:
+ * 1/ In Solution Explorer window, under Voice Bot Solution, there are several files such as Properties, 
+ *    References, App.config, Form1.cs, Program.cs, etc.
+ * 2/ Right click on References -> Add Reference...
+ * 3/ Search (Ctrl+E) Speech
+ * 4/ Click System.Speech -> OK
+ * 
  */
 namespace Voice_Bot
 {
