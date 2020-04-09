@@ -1,5 +1,8 @@
 ~ 
 [Sleep]Okay, goodbye. Never talk with you again.
+Please say wake, yes, if you want to turn off the light, else say wake, no.
+[Yes]Wake me up if you are boring. I am always here.
+[No]You can wake me up if you want to turn off the light. Have a lovely day.
 ~ 
 ~ 
 No

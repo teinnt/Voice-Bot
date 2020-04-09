@@ -14,22 +14,30 @@ namespace Voice_Bot
             private const int MOUSEEVENTF_RIGHTDOWN = 0x08;
             private const int MOUSEEVENTF_RIGHTUP = 0x10;
 
+            //Mouse click
             public static void DoMouseClick()
             {
                 Win32.mouse_event(MOUSEEVENTF_LEFTDOWN | MOUSEEVENTF_LEFTUP, 0, 0, 0, 0);
             }
 
+            //Mouse move
             public static void MoveToPoint(int X, int Y)
             {
                 Win32.SetCursorPos(X, Y);
             }
 
+            //Property accessor - read only
             public static int X { get => Cursor.Position.X; }
             public static int Y { get => Cursor.Position.Y; }
         }
 
         private class Win32
         {
+            /**
+             * Here, as those three methods are not belongs to .NET 
+             * but in User32.Dll file, which is a standard Windows component, so we need to
+             * declare [DllImport("User32.Dll")] to use them.
+             */
             //Setting location
             [DllImport("User32.Dll")]
             public static extern long SetCursorPos(int x, int y);

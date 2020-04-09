@@ -1,5 +1,8 @@
 wake
 sleep
+exit
+yes
+no
 restart
 update
 be quiet

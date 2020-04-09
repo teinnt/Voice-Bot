@@ -26,6 +26,7 @@ namespace Voice_Bot
         bool search = false;        //set if I want to search something in Google
         bool close = false;         //set if I want to close application
         bool isRunning = false;     //set if the app is running
+        bool exit = false;          //set if I want to exit application
 
         //WeatherData
         static string city = "Auckland";   //set location for checking weather
@@ -37,7 +38,8 @@ namespace Voice_Bot
         int moveArea = 50; //the amount of unit your mouse will move
 
         //Declare Arduino port
-        SerialPort port = new SerialPort("COM5", 9600, Parity.None, 8, StopBits.One);
+        static SerialPort port = new SerialPort("COM5", 9600, Parity.None, 8, StopBits.One);
+        static bool light = false; //set light status
 
         /**
          * Assign command and response lists
@@ -46,9 +48,9 @@ namespace Voice_Bot
          *       each other by line number. (eg. line 2 in Command.txt is "how are you" and 
          *       line 2 in Response.txt is "Good, and you")
          */
-        string[] comList = File.ReadAllLines(@"C:\Users\pc\Desktop\PROject\C#\Voice Bot\Command.txt");
-        string[] resList = File.ReadAllLines(@"C:\Users\pc\Desktop\PROject\C#\Voice Bot\Response.txt");
-        string[] googleSearch = File.ReadAllLines(@"C:\Users\pc\Desktop\PROject\C#\Voice Bot\Google search.txt");
+        string[] comList = File.ReadAllLines(@"C:\Users\pc\Desktop\PROject\C#\Voice Bot\Text\Command.txt");
+        string[] resList = File.ReadAllLines(@"C:\Users\pc\Desktop\PROject\C#\Voice Bot\Text\Response.txt");
+        string[] googleSearch = File.ReadAllLines(@"C:\Users\pc\Desktop\PROject\C#\Voice Bot\Text\Google search.txt");
 
         //SpeechSynthesizer 
         SpeechSynthesizer speech = new SpeechSynthesizer();
@@ -87,6 +89,7 @@ namespace Voice_Bot
 
         /**
          * Interacting method (getting command and responding)
+         * When you say something that assigned in grammarList, this method will be invoked
          * Say "Wake" to make it work ("Listening")
          * Say "Sleep" to make it stop listening ("Deaf")
          * Whenever the voice bot talks something to you, its state will change
@@ -111,7 +114,7 @@ namespace Voice_Bot
             {
                 if(record == "Google")
                 {
-                    isRunning = killProgram("chrome");
+                    isRunning = killProgram("chrome"); 
                 }
                 else
                 {
@@ -121,7 +124,7 @@ namespace Voice_Bot
                 close = false;
             }
 
-            if(record == "wake")
+            if (record == "wake")
             {
                 wake = true;
             }
@@ -129,7 +132,7 @@ namespace Voice_Bot
             if (wake == true && search == false)
             {
                 //Multi responses
-                if (resList[count].StartsWith("+"))
+                if (resList[count].StartsWith("+") || exit == true)
                 {
                     //Seperate multi responses
                     List<string> multiRes = resList[count].
@@ -218,32 +221,14 @@ namespace Voice_Bot
                         label3.Text = "State: Listening"; //Change text in label3
                     }
 
+                    //Close apps
                     if (record == "close")
                     {
                         close = true;
                     }
 
+                    //Google search
                     if(record == "search for")
-                    {
-                        search = true;
-                    }
-
-                    if (record == "play" || record == "pause")
-                    {
-                        SendKeys.Send(" ");
-                    }
-
-                    if (record == "next")
-                    {
-                        SendKeys.Send("^{RIGHT}");
-                    }
-
-                    if (record == "last")
-                    {
-                        SendKeys.Send("^{LEFT}");
-                    }
-
-                    if (record == "search for")
                     {
                         search = true;
                     }
@@ -275,6 +260,21 @@ namespace Voice_Bot
                     }
 
                     //Send Keys
+                    if (record == "play" || record == "pause")
+                    {
+                        SendKeys.Send(" ");
+                    }
+
+                    if (record == "next")
+                    {
+                        SendKeys.Send("^{RIGHT}");
+                    }
+
+                    if (record == "last")
+                    {
+                        SendKeys.Send("^{LEFT}");
+                    }
+
                     if (record == "enter")
                     {
                         SendKeys.Send("{ENTER}");
@@ -309,11 +309,11 @@ namespace Voice_Bot
 
                     if (record == "open secret tab")
                     {
-                        SendKeys.Send("^+N");
+                       SendKeys.Send("^+N");
                     }
 
                     /**
-                     * Open Arduino file to see what will happen when 
+                     * Open Arduino file (One led) to see what will happen when 
                      * port.WriteLine("A") or port.WriteLine("B") is called.
                      * 
                      * Note: If you do not connect sensor to your computer,
@@ -321,22 +321,18 @@ namespace Voice_Bot
                      */
                     if (record == "light on")
                     {
-                        port.Open();
-                        port.WriteLine("A");
-                        port.Close();
+                        changeLightStatus("A");
                     }
 
                     if (record == "light off")
                     {
-                        port.Open();
-                        port.WriteLine("B");
-                        port.Close();
+                        changeLightStatus("B");
                     }
                 }
                 //One response only
-                else
+                else if(record != "exit" && record != "yes" && record != "no")
                 {
-                    if(resList[count].Contains("Sleep"))
+                    if (resList[count].Contains("Sleep"))
                     {
                         wake = false;
                         label3.Text = "State: Deaf";
@@ -355,11 +351,11 @@ namespace Voice_Bot
                     if (resList[count].Contains("Nezuko"))
                     {
                         //Open wav file
-                        System.Media.SoundPlayer player = new System.Media.SoundPlayer(@"C:\Users\pc\Desktop\PROject\C#\Voice Bot\nezuko chan.wav");
+                        System.Media.SoundPlayer player = new System.Media.SoundPlayer(@"C:\Users\pc\Desktop\PROject\C#\Voice Bot\Media\nezuko chan.wav");
                         player.Play();
                     }
 
-                    //Change Voice Bot window status
+                    //Change Voice Bot's window status
                     if (resList[count].Contains("Minimise"))
                     {
                         this.WindowState = FormWindowState.Normal;
@@ -370,7 +366,7 @@ namespace Voice_Bot
                         this.WindowState = FormWindowState.Maximized;
                     }
 
-                    //Disrupt voice bot speech
+                    //Disrupt voice bot's speech
                     if (resList[count].Contains("Stop"))
                     {
                         speech.SpeakAsyncCancelAll();
@@ -392,7 +388,7 @@ namespace Voice_Bot
                         Process.Start(@"C:\Users\pc\AppData\Local\Microsoft\Teams\current\Teams.exe");
                     }
 
-                    //It will send the link to the search bar, and then enter
+                    //It will send the link to the search bar and then enter
                     if (resList[count].Contains("YouTube"))
                     {
                         SendKeys.Send("https://www.youtube.com");
@@ -412,10 +408,36 @@ namespace Voice_Bot
 
                     say(resList[count]);
                 }
+
+                //Exit
+                if (record == "exit")
+                {
+                    //If the light is on
+                    if (light)
+                    {
+                        say(resList[count].Substring(resList[count].LastIndexOf(']') + 1));
+                        exit = true;
+                    }
+                    else
+                    {
+                        say(resList[count + 1].Substring(resList[count + 1].LastIndexOf(']') + 1));
+                        Environment.Exit(0);
+                    }
+                }
+                else if (record == "yes" && exit == true) //turn off the light and exit
+                {
+                    say(resList[count].Substring(resList[count].LastIndexOf(']') + 1));
+                    changeLightStatus("B");
+                    Environment.Exit(0);
+                }
+                else if (record == "no" && exit == true) //exit without turning off the light
+                {
+                    say(resList[count].Substring(resList[count].LastIndexOf(']') + 1));
+                    Environment.Exit(0);
+                }
             }
 
             textBox1.AppendText(record + "\n"); //add speech to "TALK" textbox
-
             record = ""; //reset speech 
         }   
 
@@ -425,7 +447,6 @@ namespace Voice_Bot
             Process.Start(@"C:\Users\pc\Desktop\PROject\C#\Voice Bot\bin\Debug\Voice Bot.exe");
 
             //Exit current voice bot application
-            //this 0 parameter indicates for the process's sucessful completion.
             Environment.Exit(0);
         }
 
@@ -444,7 +465,7 @@ namespace Voice_Bot
 
         public static bool killProgram(string processName)
         {
-            //if the application is not running
+            //if application is not running
             if(Process.GetProcessesByName(processName).Length == 0)
             {
                 return false;
@@ -457,6 +478,23 @@ namespace Voice_Bot
                 }
 
                 return true;
+            }
+        }
+
+        public static void changeLightStatus(string id)
+        {
+            //Accessing port and update status
+            port.Open();
+            port.WriteLine(id);
+            port.Close();
+
+            if (id == "A")
+            {
+                light = true;
+            }
+            else
+            {
+                light = false;
             }
         }
     }

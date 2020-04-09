@@ -89,9 +89,8 @@ namespace Voice_Bot
             this.label3.ForeColor = System.Drawing.SystemColors.HotTrack;
             this.label3.Location = new System.Drawing.Point(161, 276);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(213, 32);
+            this.label3.Size = new System.Drawing.Size(157, 32);
             this.label3.TabIndex = 4;
-            //this.label3.Text = "State: Listening";
             this.label3.Text = "State: Deaf";
             this.label3.Click += new System.EventHandler(this.label3_Click);
             // 
@@ -123,7 +122,7 @@ namespace Voice_Bot
             this.Load += new System.EventHandler(this.Form1_Load_1);
             this.ResumeLayout(false);
             this.PerformLayout();
-                
+
         }
 
         private void Form1_Load_1(object sender, EventArgs e)
