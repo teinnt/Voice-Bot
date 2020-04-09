@@ -1,0 +1,52 @@
+wake
+sleep
+restart
+update
+be quiet
+stop
+hello
+how are you 
+yeah, I am good
+hahahaha
+be quiet
+hey laptop
+i like you
+i hate you
+do you think i like you
+tell me a joke
+tell me another joke
+i'll delete you
+minimise
+maximise
+what time is it?
+what is today?
+what's the weather like?
+is it hot now?
+open Google
+Google
+youtube
+maximise screen
+open Spotify
+Spotify
+open Teams
+Teams
+play
+pause
+next
+last
+down
+up
+left 
+right
+click
+enter
+change tab
+new tab
+close tab
+close previous tab
+close following tab
+open secret tab
+search for
+light on
+light off
+close

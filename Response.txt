@@ -1,0 +1,52 @@
+~ 
+[Sleep]Okay, goodbye. Never talk with you again.
+~ 
+~ 
+No
+[Stop] 
+hi
+Good! And you?
+I hope you will not get Coronavirus.
+Great! Keep smiling! No, I am kidding. Do you need to go to the hospital?
+No
++[Greetings]Get out, I am Santa Claus./I am angry, I am not laptop./Don't call me that, I have a name./We don't talk anymore, I am Santa Claus.
+[Like]I know it, everybody loves me.
+[Hate]Oh man, my heart is broken.
++[Like?]Of course you do. I am your assistant and humorous./I will not answer until / likes me.
+[Nezuko]
+Do you know Spider Man's aunt names May? It represents for the fifth month of the year.
++[Delete]Switch gender./Oh please don't. I love you to the moon and back./Therefore, let me assist you.
+[Minimise]No, you are so annoying
+[Maximise]Turn down for what
+-[Time] 
+-[Date] 
++[Weather]Checking weather condition./It is / now, 
++[Temp]Checking weather temperature./It is / Celsius degree. Not sure if you feel hot.
+[Google]Google opened
++[Close Google]Goodbye Google/Google is not running.
+[YouTube]Easy game
+[Max screen]Window maximised
+[Spotify]Got it
++[Close]Okay/Spotify is not running.
+[Teams]Working time!
++[Close]Get out of work/Teams is not running.
+~[Play] 
+~[Pause] 
+~[Next] 
+~[Last] 
+~[Down] 
+~[Up] 
+~[Left] 
+~[Right] 
+~[Click]
+~[Enter]
+~[Change tab]
+~[New tab]
+~[Close tab]
+~[Close previous tab]
+~[Close following tab]
+~[Open secret tab]
+~[Search for]
+~[Light on]
+~[Light off]
+~
