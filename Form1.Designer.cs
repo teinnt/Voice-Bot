@@ -35,7 +35,7 @@ namespace Voice_Bot
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
+            this.stateLabel = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
@@ -83,16 +83,16 @@ namespace Voice_Bot
             // 
             // label3
             // 
-            this.label3.AutoSize = true;
-            this.label3.BackColor = System.Drawing.SystemColors.InactiveBorder;
-            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.ForeColor = System.Drawing.SystemColors.HotTrack;
-            this.label3.Location = new System.Drawing.Point(161, 276);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(157, 32);
-            this.label3.TabIndex = 4;
-            this.label3.Text = "State: Deaf";
-            this.label3.Click += new System.EventHandler(this.label3_Click);
+            this.stateLabel.AutoSize = true;
+            this.stateLabel.BackColor = System.Drawing.SystemColors.InactiveBorder;
+            this.stateLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.stateLabel.ForeColor = System.Drawing.SystemColors.HotTrack;
+            this.stateLabel.Location = new System.Drawing.Point(161, 276);
+            this.stateLabel.Name = "label3";
+            this.stateLabel.Size = new System.Drawing.Size(157, 32);
+            this.stateLabel.TabIndex = 4;
+            this.stateLabel.Text = "State: Deaf";
+            this.stateLabel.Click += new System.EventHandler(this.label3_Click);
             // 
             // label4
             // 
@@ -109,7 +109,7 @@ namespace Voice_Bot
             this.BackColor = System.Drawing.SystemColors.InactiveBorder;
             this.ClientSize = new System.Drawing.Size(530, 317);
             this.Controls.Add(this.label4);
-            this.Controls.Add(this.label3);
+            this.Controls.Add(this.stateLabel);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.textBox2);
@@ -151,7 +151,7 @@ namespace Voice_Bot
         private System.Windows.Forms.TextBox textBox2;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label stateLabel;
         private System.Windows.Forms.Label label4;
     }
 }

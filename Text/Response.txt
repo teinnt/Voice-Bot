@@ -6,7 +6,6 @@ Please say wake, yes, if you want to turn off the light, else say wake, no.
 ~ 
 ~ 
 No
-[Stop] 
 hi
 Good! And you?
 I hope you will not get Coronavirus.
@@ -42,6 +41,7 @@ Do you know Spider Man's aunt names May? It represents for the fifth month of th
 ~[Left] 
 ~[Right] 
 ~[Click]
+~[Right Click]
 ~[Enter]
 ~[Change tab]
 ~[New tab]

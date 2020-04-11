@@ -20,32 +20,34 @@ namespace Voice_Bot
                 Win32.mouse_event(MOUSEEVENTF_LEFTDOWN | MOUSEEVENTF_LEFTUP, 0, 0, 0, 0);
             }
 
+            //Mouse right click
+            public static void DoMouseRightClick()
+            {
+                Win32.mouse_event(MOUSEEVENTF_RIGHTDOWN | MOUSEEVENTF_RIGHTUP, 0, 0, 0, 0);
+            }
+
             //Mouse move
             public static void MoveToPoint(int X, int Y)
             {
                 Win32.SetCursorPos(X, Y);
             }
-
-            //Property accessor - read only
+            
+            //Read only accessors
             public static int X { get => Cursor.Position.X; }
             public static int Y { get => Cursor.Position.Y; }
         }
 
         private class Win32
         {
-            /**
-             * Here, as those three methods are not belongs to .NET 
-             * but in User32.Dll file, which is a standard Windows component, so we need to
-             * declare [DllImport("User32.Dll")] to use them.
-             */
-            //Setting location
-            [DllImport("User32.Dll")]
-            public static extern long SetCursorPos(int x, int y);
+            //Import standard Windows methods (SetCursorPos, ClientToScreen, mouse_event)
+            [DllImport("User32.Dll")] 
+            public static extern long SetCursorPos(int x, int y); //Mouse position
 
             [DllImport("User32.Dll")]
-            public static extern bool ClientToScreen(IntPtr hWnd, ref POINT point);
+            public static extern bool ClientToScreen(IntPtr hWnd, ref POINT point); //Mouse position
 
-            [StructLayout(LayoutKind.Sequential)]
+            //Mouse position
+            [StructLayout(LayoutKind.Sequential)] 
             public struct POINT
             {
                 public int x;

@@ -6,7 +6,6 @@ no
 restart
 update
 be quiet
-stop
 hello
 how are you 
 yeah, I am good
@@ -42,6 +41,7 @@ up
 left 
 right
 click
+right click
 enter
 change tab
 new tab
