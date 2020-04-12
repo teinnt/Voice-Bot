@@ -7,7 +7,7 @@ restart
 update
 be quiet
 hello
-how are you 
+how are you
 yeah, I am good
 hahahaha
 be quiet
@@ -38,7 +38,7 @@ next
 last
 down
 up
-left 
+left
 right
 click
 right click
