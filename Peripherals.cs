@@ -32,7 +32,7 @@ namespace Voice_Bot
                 Win32.SetCursorPos(X, Y);
             }
             
-            //Read only accessors
+            //Read-only accessors
             public static int X { get => Cursor.Position.X; }
             public static int Y { get => Cursor.Position.Y; }
         }
