@@ -60,7 +60,7 @@ namespace Voice_Bot
 
         /**
          * Note: Command.txt and Response.txt are linking to each other by line number 
-         *   (eg. line 2 in Command.txt is "how are you" and line 2 in Response.txt is "Good, and you").
+         *   (eg. line 9 in Command.txt is "how are you" and line 9 in Response.txt is "Good, and you").
          */
 
         public Form1()
