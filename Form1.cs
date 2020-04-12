@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Windows.Forms;
 using System.Speech.Synthesis;
 using System.Speech.Recognition;
@@ -28,11 +28,11 @@ namespace Voice_Bot
     public partial class Form1 : Form
     {
         string name = "Taylor";     //set my name
-        static bool wake = false;   //set status to "Deaf"
+        static bool wake = false;   //set state to "Deaf"
         bool isLiked = true;        //set if I like the voice bot
         bool search = false;        //set if I want to search something in Google
-        bool closeApp = false;      //set if I want to close application
-        bool isRunning = false;     //set if the app is running
+        bool closeApp = false;      //set if I want to close an application 
+        bool isRunning = false;     //set if the app I want to close is running
         bool exit = false;          //set if I want to exit voice bot
 
         //Declare Speech
@@ -41,12 +41,12 @@ namespace Voice_Bot
         SpeechRecognitionEngine record = new SpeechRecognitionEngine();
 
         //Declare WeatherData
-        static string city = "Auckland"; 
+        static string city = "Auckland";
         WeatherData weather = new WeatherData(city);
 
-        //Declare cursor position
-        int positionY = Cursor.Position.Y;
-        int positionX = Cursor.Position.X;
+        //Define cursor position
+        static int positionY;
+        static int positionX;
         int moveArea = 50; //the amount of unit your mouse will move
 
         //Declare Arduino port
@@ -88,7 +88,7 @@ namespace Voice_Bot
             speech.SelectVoiceByHints(VoiceGender.Female);
 
             //This sentence will be spoken at the beginning.
-            speech.Speak("Hohohoho, I am Santa Claus.");  
+            speech.Speak("Hohohoho, I am Santa Claus.");
 
             InitializeComponent();
         }
@@ -99,36 +99,31 @@ namespace Voice_Bot
          * Say "Wake" to make it work ("Listening")
          * Say "Sleep" to make it stop listening ("Deaf")
          * Whenever the voice bot talks something to you, its state will change
-         * from "Listening" to "Deaf".
+         * from "Listening" to "Deaf" -> It will stop listening.
          */
         private void record_SpeechRecognized(object sender, SpeechRecognizedEventArgs e)
         {
-            //Saving your speech and its position in ComList.
+            //Saving your speech
             String record = e.Result.Text;
+
+            //Find record's position in comList array
             int count = Array.IndexOf(comList, record);
 
-            /**
-             * If you say "search for" -> search = true  
-             * Then, when you say something in the grammarList, 
-             * that word will be searched on the Internet.
-             */
+            //if search = true and you say something in grammarList 
             if (search)
             {
-                Process.Start("https://www.google.com/search?q=" + record);
+                Process.Start("https://www.google.com/search?q=" + record); //Google search
                 changeState(false, stateLabel); //Change state to "Deaf"
                 search = false;
             }
 
-            /**
-             * If you say "close" -> close = true  
-             * Then, when you say an application name in the grammarList 
-             * (eg. Teams), this app will be killed.
-             */
+            //If closeApp = true and you say an app name in the grammarList (eg. Teams)
             if (closeApp)
             {
-                if(record == "Google")
+                if (record == "Google")
                 {
-                    isRunning = killProgram("chrome"); 
+                    isRunning = killProgram("chrome");
+                    //isRunning is used for announcing if this app is closed or not running
                 }
                 else
                 {
@@ -145,9 +140,12 @@ namespace Voice_Bot
             }
 
             /**
-             * If wake = true and search == false, response will be processed according to its type 
-             *           (Multi responses, Date and Time, No response, One response, Exit) 
-             *  and its keyword (eg. If response contains "Weather", it will show weather condition)
+             * DOING TASKS when wake = true and search = false.
+             * From here, every response will be processed according to its type
+             * (Multi responses, Date and Time, No response, One response, Exit)
+             * and its key word (eg. Weather).
+             *
+             * You are suggested to have a look at Response.txt before continuing
              */
             if (wake == true && search == false)
             {
@@ -202,7 +200,7 @@ namespace Voice_Bot
 
                     if (resList[count].Contains("Close"))
                     {
-                        if (isRunning) 
+                        if (isRunning)
                         {
                             say(multiRes[0]);
                         }
@@ -247,21 +245,25 @@ namespace Voice_Bot
                     //Changing cursor location
                     if (record == "down")
                     {
+                        updateMousePosition();
                         Voice_Bot.Peripherals.Mouse.MoveToPoint(positionX, positionY += moveArea);
                     }
 
                     if (record == "up")
                     {
+                        updateMousePosition();
                         Voice_Bot.Peripherals.Mouse.MoveToPoint(positionX, positionY -= moveArea);
                     }
 
                     if (record == "left")
                     {
+                        updateMousePosition();
                         Voice_Bot.Peripherals.Mouse.MoveToPoint(positionX -= moveArea, positionY);
                     }
 
                     if (record == "right")
                     {
+                        updateMousePosition();
                         Voice_Bot.Peripherals.Mouse.MoveToPoint(positionX += moveArea, positionY);
                     }
 
@@ -436,14 +438,14 @@ namespace Voice_Bot
                             Environment.Exit(0);
                         }
                     }
-                    
+
                     if (record == "yes" && exit == true) //turn off the light and exit
                     {
                         say(resList[count].Substring(resList[count].LastIndexOf(']') + 1));
                         changeLightStatus("B");
                         Environment.Exit(0);
                     }
-                    
+
                     if (record == "no" && exit == true) //exit without turning off the light
                     {
                         say(resList[count].Substring(resList[count].LastIndexOf(']') + 1));
@@ -456,8 +458,8 @@ namespace Voice_Bot
             textBox1.AppendText(record + "\n");
 
             //reset speech 
-            record = ""; 
-        }   
+            record = "";
+        }
 
         public void restart()
         {
@@ -498,19 +500,25 @@ namespace Voice_Bot
         public static bool killProgram(string processName)
         {
             //if application is not running
-            if(Process.GetProcessesByName(processName).Length == 0)
+            if (Process.GetProcessesByName(processName).Length == 0)
             {
                 return false;
             }
             else
             {
-                foreach(Process process in Process.GetProcessesByName(processName))
+                foreach (Process process in Process.GetProcessesByName(processName))
                 {
                     process.Kill();
                 }
 
                 return true;
             }
+        }
+
+        public static void updateMousePosition()
+        {
+            positionY = Cursor.Position.Y;
+            positionX = Cursor.Position.X;
         }
 
         public static void changeLightStatus(string id)
