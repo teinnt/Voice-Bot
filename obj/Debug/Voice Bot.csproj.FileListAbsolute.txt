@@ -8,3 +8,13 @@ C:\Users\pc\Desktop\PROject\C#\Voice Bot\obj\Debug\Voice Bot.csproj.GenerateReso
 C:\Users\pc\Desktop\PROject\C#\Voice Bot\obj\Debug\Voice Bot.exe
 C:\Users\pc\Desktop\PROject\C#\Voice Bot\obj\Debug\Voice Bot.pdb
 C:\Users\pc\Desktop\PROject\C#\Voice Bot\obj\Debug\Voice Bot.csproj.CoreCompileInputs.cache
+C:\Users\pc\Desktop\PROject\Projects\Voice bot\Code\Voice-Bot\bin\Debug\Voice Bot.exe.config
+C:\Users\pc\Desktop\PROject\Projects\Voice bot\Code\Voice-Bot\bin\Debug\Voice Bot.exe
+C:\Users\pc\Desktop\PROject\Projects\Voice bot\Code\Voice-Bot\bin\Debug\Voice Bot.pdb
+C:\Users\pc\Desktop\PROject\Projects\Voice bot\Code\Voice-Bot\obj\Debug\Voice Bot.csprojAssemblyReference.cache
+C:\Users\pc\Desktop\PROject\Projects\Voice bot\Code\Voice-Bot\obj\Debug\Voice_Bot.Form1.resources
+C:\Users\pc\Desktop\PROject\Projects\Voice bot\Code\Voice-Bot\obj\Debug\Voice_Bot.Properties.Resources.resources
+C:\Users\pc\Desktop\PROject\Projects\Voice bot\Code\Voice-Bot\obj\Debug\Voice Bot.csproj.GenerateResource.cache
+C:\Users\pc\Desktop\PROject\Projects\Voice bot\Code\Voice-Bot\obj\Debug\Voice Bot.csproj.CoreCompileInputs.cache
+C:\Users\pc\Desktop\PROject\Projects\Voice bot\Code\Voice-Bot\obj\Debug\Voice Bot.exe
+C:\Users\pc\Desktop\PROject\Projects\Voice bot\Code\Voice-Bot\obj\Debug\Voice Bot.pdb
