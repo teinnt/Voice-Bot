@@ -15,7 +15,7 @@ using System.Linq;
  * move your mouse to the key word (eg. "SpeechSynthesizer") 
  * to see its function or Ctrl + click to navigate to its place.
  * 
- * In order to make it speak, you need to add System.Speak reference:
+ * To make it speak, you need to add System.Speak reference:
  * 1/ In Solution Explorer window, under Voice Bot Solution, there are several files such as Properties, 
  *    References, App.config, Form1.cs, Program.cs, etc.
  * 2/ Right click on References -> Add Reference...
@@ -401,7 +401,7 @@ namespace Voice_Bot
                         Process.Start(@"C:\Users\pc\AppData\Local\Microsoft\Teams\current\Teams.exe");
                     }
 
-                    //Send the link to search bar and then enter
+                    //Send the link to search bar -> then enter
                     if (resList[count].Contains("YouTube"))
                     {
                         SendKeys.Send("https://www.youtube.com");
@@ -421,7 +421,7 @@ namespace Voice_Bot
 
                     say(resList[count]);
                 }
-                //With "exit", "yes", and "no"
+                //"exit", "yes", and "no"
                 else
                 {
                     if (record == "exit")
@@ -482,17 +482,17 @@ namespace Voice_Bot
             changeState(false, stateLabel);
         }
 
-        public static void changeState(bool currentState, Label stateLabel)
+        public static void changeState(bool nextState, Label stateLabel)
         {
-            //Wake it up
-            if (currentState) 
+            wake = nextState;
+            
+            //Update "State" label
+            if (nextState) 
             {
-                wake = true;
-                stateLabel.Text = "State: Listening"; //Update "State" label
+                stateLabel.Text = "State: Listening"; 
             }
             else 
             {
-                wake = false;
                 stateLabel.Text = "State: Deaf";
             }
         }
