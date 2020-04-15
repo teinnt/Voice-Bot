@@ -149,7 +149,7 @@ namespace Voice_Bot
              */
             if (wake == true && search == false)
             {
-                //Multi responses - start with '+'
+                //Multi responses '+'
                 if (resList[count].StartsWith("+"))
                 {
                     //Seperate multi responses by '/'
@@ -210,7 +210,7 @@ namespace Voice_Bot
                         }
                     }
                 }
-                //Date and Time - start with '-'
+                //Date and Time '-'
                 else if (resList[count].StartsWith("-"))
                 {
                     if (resList[count].Contains("Date"))
@@ -223,7 +223,7 @@ namespace Voice_Bot
                         say(DateTime.Now.ToString("h:mm tt"));
                     }
                 }
-                //No response - start with '+' (the state will not automatically change to "Deaf")
+                //No response '~' (the state will not automatically change to "Deaf")
                 else if (resList[count].StartsWith("~"))
                 {
                     if (record == "restart" || record == "update")
@@ -421,7 +421,7 @@ namespace Voice_Bot
 
                     say(resList[count]);
                 }
-                //Exit
+                //With "exit", "yes", and "no"
                 else
                 {
                     if (record == "exit")
@@ -484,16 +484,16 @@ namespace Voice_Bot
 
         public static void changeState(bool currentState, Label stateLabel)
         {
-            //If true, wake it up
+            //Wake it up
             if (currentState) 
             {
                 wake = true;
-                stateLabel.Text = "Status: Listening"; //Update State Label
+                stateLabel.Text = "State: Listening"; //Update "State" label
             }
             else 
             {
                 wake = false;
-                stateLabel.Text = "Status: Deaf";
+                stateLabel.Text = "State: Deaf";
             }
         }
 
