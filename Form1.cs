@@ -12,10 +12,10 @@ using System.Linq;
  * Hi, this is C#.
  * 
  * If you don't understand any method or class, you can 
- * move your mouse to the key word (eg. move your mouse to the word "SpeechSynthesizer" 
- * to see its function) or Ctrl + click to navigate to its location.
+ * move your mouse to the key word (eg. "SpeechSynthesizer") 
+ * to see its function or Ctrl + click to navigate to its place.
  * 
- * In other to make it speak, you need to add System.Speak reference:
+ * In order to make it speak, you need to add System.Speak reference:
  * 1/ In Solution Explorer window, under Voice Bot Solution, there are several files such as Properties, 
  *    References, App.config, Form1.cs, Program.cs, etc.
  * 2/ Right click on References -> Add Reference...
@@ -53,7 +53,7 @@ namespace Voice_Bot
         static SerialPort port = new SerialPort("COM5", 9600, Parity.None, 8, StopBits.One);
         static bool light = false; //set light status
 
-        //Assign command and response lists
+        //Assign command and response
         string[] comList = File.ReadAllLines(@"C:\Users\pc\Desktop\PROject\C#\Voice Bot\Text\Command.txt");
         string[] resList = File.ReadAllLines(@"C:\Users\pc\Desktop\PROject\C#\Voice Bot\Text\Response.txt");
         string[] googleSearch = File.ReadAllLines(@"C:\Users\pc\Desktop\PROject\C#\Voice Bot\Text\Google search.txt");
@@ -99,14 +99,14 @@ namespace Voice_Bot
          * Say "Wake" to make it work ("Listening")
          * Say "Sleep" to make it stop listening ("Deaf")
          * Whenever the voice bot talks something to you, its state will change
-         * from "Listening" to "Deaf" -> It will stop listening.
+         * from "Listening" to "Deaf" -> Stop listening.
          */
         private void record_SpeechRecognized(object sender, SpeechRecognizedEventArgs e)
         {
             //Saving your speech
             String record = e.Result.Text;
 
-            //Find record's position in comList array
+            //Find record's position in comList array to get resList[count]
             int count = Array.IndexOf(comList, record);
 
             //if search = true and you say something in grammarList 
@@ -123,7 +123,7 @@ namespace Voice_Bot
                 if (record == "Google")
                 {
                     isRunning = killProgram("chrome");
-                    //isRunning is used for announcing if this app is closed or not running
+                    //isRunning is used for announcing if this app is not running or has been closed.
                 }
                 else
                 {
@@ -143,16 +143,16 @@ namespace Voice_Bot
              * DOING TASKS when wake = true and search = false.
              * From here, every response will be processed according to its type
              * (Multi responses, Date and Time, No response, One response, Exit)
-             * and its key word (eg. Weather).
+             * and its keyword (eg. Weather).
              *
              * You are suggested to have a look at Response.txt before continuing
              */
             if (wake == true && search == false)
             {
-                //Multi responses
+                //Multi responses - start with '+'
                 if (resList[count].StartsWith("+"))
                 {
-                    //Seperate multi responses
+                    //Seperate multi responses by '/'
                     List<string> multiRes = resList[count].
                         Substring(resList[count].LastIndexOf(']') + 1).Split('/').ToList();
 
@@ -210,7 +210,7 @@ namespace Voice_Bot
                         }
                     }
                 }
-                //Date and Time
+                //Date and Time - start with '-'
                 else if (resList[count].StartsWith("-"))
                 {
                     if (resList[count].Contains("Date"))
@@ -223,7 +223,7 @@ namespace Voice_Bot
                         say(DateTime.Now.ToString("h:mm tt"));
                     }
                 }
-                //No response (the state will not automatically change to "Deaf")
+                //No response - start with '+' (the state will not automatically change to "Deaf")
                 else if (resList[count].StartsWith("~"))
                 {
                     if (record == "restart" || record == "update")
@@ -242,7 +242,7 @@ namespace Voice_Bot
                         search = true;
                     }
 
-                    //Changing cursor location
+                    //Change cursor location
                     if (record == "down")
                     {
                         updateMousePosition();
@@ -349,7 +349,7 @@ namespace Voice_Bot
                         changeLightStatus("B");
                     }
                 }
-                //One response 
+                //One response - the rest responses not including "exit", "yes", and "no"
                 else if (record != "exit" && record != "yes" && record != "no")
                 {
                     if (resList[count].Contains("Sleep"))
@@ -385,7 +385,7 @@ namespace Voice_Bot
                         this.WindowState = FormWindowState.Maximized;
                     }
 
-                    //Accessing applications
+                    //Access applications
                     if (resList[count].Contains("Google"))
                     {
                         Process.Start(@"C:\Program Files (x86)\Google\Chrome\Application\chrome.exe");
@@ -401,7 +401,7 @@ namespace Voice_Bot
                         Process.Start(@"C:\Users\pc\AppData\Local\Microsoft\Teams\current\Teams.exe");
                     }
 
-                    //It will send the link to search bar and then enter
+                    //Send the link to search bar and then enter
                     if (resList[count].Contains("YouTube"))
                     {
                         SendKeys.Send("https://www.youtube.com");
@@ -413,7 +413,7 @@ namespace Voice_Bot
                         SendKeys.Send("f");
                     }
 
-                    //If response contains []
+                    //If response contains "["
                     if (resList[count].Contains("["))
                     {
                         resList[count] = resList[count].Substring(resList[count].LastIndexOf(']') + 1);
@@ -426,7 +426,7 @@ namespace Voice_Bot
                 {
                     if (record == "exit")
                     {
-                        //If the light is on
+                        //If the light is on, ask whether user wants to turn it off
                         if (light)
                         {
                             say(resList[count].Substring(resList[count].LastIndexOf(']') + 1));
@@ -454,16 +454,16 @@ namespace Voice_Bot
                 }
             }
 
-            //add speech to "TALK" textbox
+            //Update command in "TALK" textbox
             textBox1.AppendText(record + "\n");
 
-            //reset speech 
+            //Reset record 
             record = "";
         }
 
         public void restart()
         {
-            //open another "Voice Bot.exe" - voice bot application
+            //open another "Voice Bot.exe"
             Process.Start(@"C:\Users\pc\Desktop\PROject\C#\Voice Bot\bin\Debug\Voice Bot.exe");
 
             //Exit current voice bot application
@@ -472,25 +472,25 @@ namespace Voice_Bot
 
         public void say(String response)
         {
-            //Speak "response"
+            //Speak response
             speech.Speak(response); //Text appears after speech
 
-            //Write "response" in the "RESPONSE" textbox.
+            //Update response in "RESPONSE" textbox.
             textBox2.AppendText(response + "\n");
 
-            //Set status to "Deaf"
+            //Set state to "Deaf"
             changeState(false, stateLabel);
         }
 
         public static void changeState(bool currentState, Label stateLabel)
         {
-            //Change current state
-            if (currentState)
+            //If true, wake it up
+            if (currentState) 
             {
                 wake = true;
-                stateLabel.Text = "Status: Listening";
+                stateLabel.Text = "Status: Listening"; //Update State Label
             }
-            else
+            else 
             {
                 wake = false;
                 stateLabel.Text = "Status: Deaf";
@@ -499,7 +499,7 @@ namespace Voice_Bot
 
         public static bool killProgram(string processName)
         {
-            //if application is not running
+            //if this app is not running
             if (Process.GetProcessesByName(processName).Length == 0)
             {
                 return false;
@@ -508,7 +508,7 @@ namespace Voice_Bot
             {
                 foreach (Process process in Process.GetProcessesByName(processName))
                 {
-                    process.Kill();
+                    process.Kill(); //Kill process
                 }
 
                 return true;
@@ -523,7 +523,7 @@ namespace Voice_Bot
 
         public static void changeLightStatus(string id)
         {
-            //Accessing port and update light status
+            //Accessing port and updating light status
             port.Open();
             port.WriteLine(id);
             port.Close();
