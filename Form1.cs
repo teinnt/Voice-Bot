@@ -15,7 +15,7 @@ using System.Linq;
  * move your mouse to the key word (eg. "SpeechSynthesizer") 
  * to see its function or Ctrl + click to navigate to its place.
  * 
- * To make it speak, you need to add System.Speak reference:
+ * You need to add System.Speak reference for using speech:
  * 1/ In Solution Explorer window, under Voice Bot Solution, there are several files such as Properties, 
  *    References, App.config, Form1.cs, Program.cs, etc.
  * 2/ Right click on References -> Add Reference...
@@ -143,20 +143,18 @@ namespace Voice_Bot
              * DOING TASKS when wake = true and search = false.
              * From here, every response will be processed according to its type
              * (Multi responses, Date and Time, No response, One response, Exit)
-             * and its keyword (eg. Weather).
-             *
-             * You are suggested to have a look at Response.txt before continuing
+             * and its function (eg. Weather), identified through Response.txt.
              */
             if (wake == true && search == false)
             {
-                //Multi responses '+'
+                //Multi responses - starts with '+'
                 if (resList[count].StartsWith("+"))
                 {
                     //Seperate multi responses by '/'
                     List<string> multiRes = resList[count].
                         Substring(resList[count].LastIndexOf(']') + 1).Split('/').ToList();
 
-                    //If response contains a specific key word
+                    //If response contains a specific keyword 
                     if (resList[count].Contains("Greetings"))
                     {
                         Random random = new Random();
@@ -210,7 +208,7 @@ namespace Voice_Bot
                         }
                     }
                 }
-                //Date and Time '-'
+                //Date and Time - starts with '-'
                 else if (resList[count].StartsWith("-"))
                 {
                     if (resList[count].Contains("Date"))
@@ -223,7 +221,7 @@ namespace Voice_Bot
                         say(DateTime.Now.ToString("h:mm tt"));
                     }
                 }
-                //No response '~' (the state will not automatically change to "Deaf")
+                //No response - starts with '~' (the state will not automatically change to "Deaf")
                 else if (resList[count].StartsWith("~"))
                 {
                     if (record == "restart" || record == "update")
@@ -421,7 +419,7 @@ namespace Voice_Bot
 
                     say(resList[count]);
                 }
-                //"exit", "yes", and "no"
+                //Responses including "exit", "yes", and "no"
                 else
                 {
                     if (record == "exit")
