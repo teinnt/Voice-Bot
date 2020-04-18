@@ -15,7 +15,7 @@ using System.Linq;
  * move your mouse to the key word (eg. "SpeechSynthesizer") 
  * to see its function or Ctrl + click to navigate to its place.
  * 
- * You need to add System.Speak reference for using speech:
+ * You also need to add System.Speak reference for using speech:
  * 1/ In Solution Explorer window, under Voice Bot Solution, there are several files such as Properties, 
  *    References, App.config, Form1.cs, Program.cs, etc.
  * 2/ Right click on References -> Add Reference...
