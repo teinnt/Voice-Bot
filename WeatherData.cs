@@ -3,7 +3,6 @@ using System.Xml;
 
 namespace Voice_Bot
 {
-    //Working with assigned data
     class WeatherData
     {
         private string city;
@@ -29,7 +28,6 @@ namespace Voice_Bot
         public string Condition { get => condition; set => condition = value; }
     }
 
-    //API access
     class WeatherAPI
     {
         public WeatherAPI(string city)
@@ -66,8 +64,8 @@ namespace Voice_Bot
         private void SetCurrentURL(string location)
         {
             /**
-             * If you have an API key, you can go to that link to check data.
-             * Remember to assign location (eg. Auckland)
+             * If you have an APIKEY, you can open this link below to check current weather data.
+             * Remember to assign location (eg. Auckland) and APIKEY.
              */
             CurrentURL = "http://api.openweathermap.org/data/2.5/weather?q=" 
                 + location + "&mode=xml&units=metric&APPID=" + APIKEY;
