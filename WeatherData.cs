@@ -1,7 +1,7 @@
 ﻿using System.Net;
 using System.Xml;
 
-namespace Voice_Bot
+namespace VoiceBot
 {
     class WeatherData
     {
@@ -57,16 +57,13 @@ namespace Voice_Bot
         }
 
         //You need to create your own APIKEY in Openweathermap if you want to use its API
-        private const string APIKEY = "YOUR APIKEY HERE";
+        private const string APIKEY = "891260b31c2329270dd152bbf4cafe88";
         private string CurrentURL;
         private XmlDocument xmlDocument;
 
+        //Get URL that includes weather data 
         private void SetCurrentURL(string location)
         {
-            /**
-             * If you have an APIKEY, you can open this link below to check current weather data.
-             * Remember to assign location (eg. Auckland) and APIKEY.
-             */
             CurrentURL = "http://api.openweathermap.org/data/2.5/weather?q=" 
                 + location + "&mode=xml&units=metric&APPID=" + APIKEY;
         }

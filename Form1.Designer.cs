@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Voice_Bot
+namespace VoiceBot
 {
     partial class Form1
     {

@@ -2,7 +2,7 @@
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
 
-namespace Voice_Bot
+namespace VoiceBot
 {
     class Peripherals
     {

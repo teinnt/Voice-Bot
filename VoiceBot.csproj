@@ -67,6 +67,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ResponseConstant.cs" />
     <Compile Include="Peripherals.cs" />
     <Compile Include="WeatherData.cs" />
     <Compile Include="Form1.cs">

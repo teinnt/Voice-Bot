@@ -29,7 +29,7 @@ Do you know Spider Man's aunt names May? It represents for the fifth month of th
 [YouTube]Easy game
 [Max screen]Window maximised
 [Spotify]Got it
-+[Close]Okay/Spotify is not running.
++[Close]Why, I am listening to music. Okay/Spotify is not running.
 [Teams]Working time!
 +[Close]Get out of work/Teams is not running.
 ~[Play] 

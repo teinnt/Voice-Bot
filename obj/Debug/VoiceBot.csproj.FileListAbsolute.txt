@@ -1,0 +1,10 @@
+C:\Users\pc\Desktop\PROject\C#\Voice Bot\bin\Debug\Voice Bot.exe.config
+C:\Users\pc\Desktop\PROject\C#\Voice Bot\bin\Debug\Voice Bot.exe
+C:\Users\pc\Desktop\PROject\C#\Voice Bot\bin\Debug\Voice Bot.pdb
+C:\Users\pc\Desktop\PROject\C#\Voice Bot\obj\Debug\VoiceBot.csprojAssemblyReference.cache
+C:\Users\pc\Desktop\PROject\C#\Voice Bot\obj\Debug\VoiceBot.Form1.resources
+C:\Users\pc\Desktop\PROject\C#\Voice Bot\obj\Debug\Voice_Bot.Properties.Resources.resources
+C:\Users\pc\Desktop\PROject\C#\Voice Bot\obj\Debug\VoiceBot.csproj.GenerateResource.cache
+C:\Users\pc\Desktop\PROject\C#\Voice Bot\obj\Debug\VoiceBot.csproj.CoreCompileInputs.cache
+C:\Users\pc\Desktop\PROject\C#\Voice Bot\obj\Debug\Voice Bot.exe
+C:\Users\pc\Desktop\PROject\C#\Voice Bot\obj\Debug\Voice Bot.pdb
